@@ -2,14 +2,18 @@
 $(document).ready(function() {
     console.log("running the recipe.js function")
 
+    var newIngredient = $("#ingredient");
+
     //create a new ingredient (I will probably need to get rid of this, and have typehead.js look through available ingredients)
-    $(".create-form").on("submit", function(event) {
+    $("#ingredient").on("click", function(event) {
         //need to preventDefault on the entry
         event.preventDefault();
 
+        //making a new ingredient object
+        //old code: $("[name=ingredient]:checked").val().trim()
         var newIngredient = {
-            name: $("ingredient").val().trim(),
-            addIngredient: $("[name=ingredient]:checked").val().trim()
+            name: $("#ingredient").val().trim()
+            
         };
 
         //Post request
@@ -24,7 +28,7 @@ $(document).ready(function() {
             }
         );
         //reset the input value to blank
-        $("ingredient").val("");
+        $("#ingredient").val("");
     });
 
 
@@ -38,7 +42,7 @@ $(document).ready(function() {
             function() {
                 console.log(" Ingredient removed: ", id);
                 //Reload the page to get the updated list
-                locaiton.reload();
+                location.reload();
             }
         );
     });
