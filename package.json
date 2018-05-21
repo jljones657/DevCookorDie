@@ -15,7 +15,17 @@
     "express-handlebars": "^3.0.0",
     "fs": "0.0.1-security",
     "handlebars": "^4.0.11",
+    "mysql2": "^1.5.3",
     "path": "^0.12.7",
     "sequelize": "^4.37.7"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jljones657/DevCookorDie.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jljones657/DevCookorDie/issues"
+  },
+  "homepage": "https://github.com/jljones657/DevCookorDie#readme"
 }

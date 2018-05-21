@@ -19,5 +19,15 @@ module.exports = function(app) {
     })
   });
 
+  app.get("/start", function(req, res) {
+    db.Recipe.findAll({}).then(function (recipes_db) {
+      let hbsObject = {
+        recipes: recipes_db
+      };
+      console.log('HTML Routes - hbsObject', JSON.stringify(hbsObject))
+      res.render("start", hbsObject)
+    })
+  });
+
 
 };

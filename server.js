@@ -12,6 +12,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
+//to be able to use page links
+app.use(express.static("public"));
+
+
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -20,6 +24,15 @@ const exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+
+//data//
+// var lunches = [
+//   {
+//     lunch:"beef and cheese"
+//   },{
+//     lunch:"chicken"
+//   }
+// ]
 
 // Import routes and give the server access to them.
 require("./routes/api-routes.js")(app);
