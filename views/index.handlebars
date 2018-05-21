@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" type="text/css" href="landingpage.css"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/landingpage.css"/>
 
 
 
@@ -60,17 +60,27 @@
         <div class="col-md-4">
 
           <!-- Search Widget -->
-          <form class="card my-4">
-            <h5 class="card-header">What's in the fridge?</h5>
-            <div class="card-body">
-              <div class="input-group">
-                <input type="text" placeholder="Add Ingredient...">
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button" id="ingredient">Add!</button>
-                </span>
-              </div>
-            </div>
-          </form>
+         <div class="ingredient-container">
+					<h1>What's in the Fridge?</h1>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="form-row">
+								<form id="ingredient-form">
+									<td colspan="4">
+										<input placeholder="Enter an Ingredient" id="ingredient" type="text" />
+									</td>
+									<td><button type="submit" class="btn btn-success">Add Ingredient</button>
+									</td>
+								</form>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
           <!-- Side Widget -->
           <div class="card my">
