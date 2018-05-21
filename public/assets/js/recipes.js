@@ -1,3 +1,48 @@
+// $(document).ready(function(){
+//     var $newIngredient = $("#ingredient");
+
+//     $(document).on("submit", "#ingredient", insertIngredient);
+    
+//     var ingredients = [];
+
+//     getIngredients();
+
+//     function getIngredients() {
+//         $.get("/api/ingredients", function(data) {
+//           ingredients = data;
+//         });
+//       }
+    
+//     function insertIngredient(event) {
+//         event.preventDefault();
+        
+//         var recipe = {
+//           name: $newIngredient.val().trim(),
+//         };
+
+//         $.ajax({
+//             method: "PUT",
+//             url: "/api/ingredients",
+//             data: ingredients
+//           }).
+    
+//         $.post("/api/ingredients", recipe, getIngredients);
+//         $newIngredient.val("");
+//       }
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Wait to attach the handlers until the DOM is fully loaded
 $(document).ready(function() {
     console.log("running the recipe.js function")
