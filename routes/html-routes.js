@@ -1,6 +1,8 @@
 // Dependencies
 // =============================================================
-let db= require("../models");
+var express = require('express');
+let db = require("../models");
+var path = require("path");
 
 // Routes
 // =============================================================
@@ -10,24 +12,25 @@ module.exports = function(app) {
 
   // index route loads view.html
   app.get("/", function(req, res) {
-    db.Recipe.findAll({}).then(function (recipes_db) {
-      let hbsObject = {
-        recipes: recipes_db
-      };
-      console.log('HTML Routes - hbsObject', JSON.stringify(hbsObject))
-      res.render("index", hbsObject)
-    })
+    res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
-  app.get("/start", function(req, res) {
-    db.Recipe.findAll({}).then(function (recipes_db) {
-      let hbsObject = {
-        recipes: recipes_db
-      };
-      console.log('HTML Routes - hbsObject', JSON.stringify(hbsObject))
-      res.render("start", hbsObject)
-    })
+  app.get("/recipes", function(req, res) {
+    res.render('index')
   });
 
 
 };
+
+
+
+  // // index route loads view.html (This code actually works, so keeping it around for the moment)
+  // app.get("/", function(req, res) {
+  //   db.Recipe.findAll({}).then(function (dbRecipe) {
+  //     let hbsObject = {
+  //       recipes: dbRecipe
+  //     };
+  //     console.log('HTML Routes - hbsObject', JSON.stringify(hbsObject))
+  //     res.render("index", hbsObject)
+  //   })
+  // });

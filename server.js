@@ -22,17 +22,11 @@ app.use(express.static(path.join(__dirname, '/public')));
 // Set Handlebars.
 const exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-//data//
-// var lunches = [
-//   {
-//     lunch:"beef and cheese"
-//   },{
-//     lunch:"chicken"
-//   }
-// ]
+// Static directory
+app.use(express.static("public"));
 
 // Import routes and give the server access to them.
 require("./routes/api-routes.js")(app);
