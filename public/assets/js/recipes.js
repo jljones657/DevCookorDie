@@ -41,17 +41,17 @@ $(document).ready(function() {
     //     return newTr;
     // }
 
-    // //Getting Ingredients, and rendering them to the Page
-    // function getIngredients() {
-    //     $.get("/api/ingredients", function(data) {
-    //         var rowsToAdd = [];
-    //         for (vari = 0; i < data.length; i++) {
-    //             rowsToAdd.push(createIngredientRow(data[i]));
-    //         }
-    //         renderIngredientList(rowsToAdd);
-    //         newIngredient.val("");
-    //     });
-    // }
+    //Getting Ingredients, and rendering them to the Page
+    function getIngredients() {
+        $.get("/api/ingredients", function(data) {
+            var rowsToAdd = [];
+            for (vari = 0; i < data.length; i++) {
+                rowsToAdd.push(createIngredientRow(data[i]));
+            }
+            renderIngredientList(rowsToAdd);
+            newIngredient.val("");
+        });
+    }
     
      // A function for rendering the list of authors to the page
     function renderAuthorList(rows) {
