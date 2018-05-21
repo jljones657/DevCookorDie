@@ -28,7 +28,7 @@ $(document).ready(function() {
             }
         );
         //reset the input value to blank
-        $("#ingredient").val("");
+        // $("#ingredient").val("");
     });
 
 

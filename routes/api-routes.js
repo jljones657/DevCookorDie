@@ -27,10 +27,10 @@ module.exports = function(app) {
 
     // POST route for saving a new ingredient
   app.post("/api/ingredients", function(req, res) {
-    console.log(req.name);
+    console.log(req.body.name);
     db.Recipe.create({
       //Should be req.body.name
-      name: req.name,
+      name: req.body.name,
     })
     .then(function(dbRecipe) {
       res.json(dbRecipe);
