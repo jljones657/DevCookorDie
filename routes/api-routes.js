@@ -2,19 +2,11 @@ var db = require("../models");
 
 module.exports = function(app) {
   
-  // Post route for adding an ingredient
-  app.post("/api/ingredients", function(req, res) {
-    //Add sequelize code for creating a ingredient using req.body
-    //return a result using res.json
-    console.log("Api Routes: Post is being requested \n",
-      "\tRecipe.name: ", req.body.name)
-    db.Recipe.create({
-      name:req.body.name
-    }).then(dbRecipe => res.json(dbRecipe))
-    .catch( function(err){
-      console.log("Api Routes: Ingredient created error!!!: \n", err);
-      res.json(err);
-      console.log(res.json(err));
+
+
+  app.post("/api/ingredients/", function(req, res) {
+    db.Recipe.create(req.body).then(function(dbRecipe) {
+      res.json(dbRecipe);
     });
   });
 
@@ -25,16 +17,6 @@ module.exports = function(app) {
     }).catch( err => res.json(err))
   });
 
-    // POST route for saving a new ingredient
-  app.post("/api/ingredients", function(req, res) {
-    console.log(req.name);
-    db.Recipe.create({
-      name: req.name,
-    })
-    .then(function(dbRecipe) {
-      res.json(dbRecipe);
-    });
-  });
 
   //Delete route for deleting ingredients
   app.delete("/api/ingredients/:id", function(req, res){
