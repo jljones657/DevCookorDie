@@ -3,72 +3,65 @@ var db = require("../models");
 module.exports = function(app){
 
   app.get("/", function(req, res){
-    res.render("index.handlebars");
+    res.redirect("/recipes");
   })
 
-  app.post("api/ingredients", function(req, res){
-  db.Recipe.create({
-    name: req.body.name,
+  app.get("/recipes", function(req, res) {
+    // Add sequelize code to find all posts, and return them to the user with res.json
+    db.Recipe.findAll({})
+    .then(function(dbIngredient){
+      res.render("index", { data:dbIngredient })
+    })
+
+  });
+
+  app.get("/recipes/new", function(req, res){
+    res.render("new");
   })
-  .then(function(dbRecipe){
-    res.json(dbRecipe)
+
+
+  app.post("/recipes", function(req, res) {
+    db.Recipe.create(req.body).then(function(dbRecipe) {
+      res.redirect("/recipes")
+    });
+  });
+
+  app.get("/recipes/:id", function(req, res){
+   db.Recipe.findOne({
+     where: {
+       id: req.params.id
+     }
+   }).then(function(ingredientSearch){
+    res.render("show", { data:ingredientSearch })
+   })
   })
+
+  app.get("/recipes/:id/edit", function(req, res){
+    db.Recipe.findOne({
+    where: {
+      id: req.params.id
+    }  
+    }).then(function(updatedIngredients){
+      res.render("edit", {data:updatedIngredients});
+    })
+   
   })
+
+  app.put("/recipes/:id", function(req,res){
+    console.log(req.body);
+    db.Recipe.update({
+      name: req.body.name,
+    }, {
+      where: {
+        id: req.body.data
+      }
+    }).then(function(data) {
+      if(err){
+        res.redirect("/recipes");
+      }else {
+        res.redirect("/recipes" + req.params.id );
+      }    
+    });
+  });
  
- 
-
-
 };
-
-
-  // // Post route for adding an ingredient
-  // app.post("/api/ingredients", function(req, res) {
-  //   //Add sequelize code for creating a ingredient using req.body
-  //   //return a result using res.json
-  //   console.log("Api Routes: Post is being requested \n",
-  //     "\tRecipe.name: ", req.body.name)
-  //   db.Recipe.create({
-  //     name:req.body.name
-  //   }).then(dbRecipe => res.json(dbRecipe))
-  //   .catch( function(err){
-  //     console.log("Api Routes: Ingredient created error!!!: \n", err);
-  //     res.json(err);
-  //     console.log(res.json(err));
-  //   });
-  // });
-
-  // app.get("/api/ingredients", function(req, res) {
-  //   db.Recipe.findAll({}).then( function (dbRecipe) {
-  //     console.log ("Api routes all the ingredient objects \n ", dbRecipe);
-  //     res.json(dbRecipe);
-  //   }).catch( err => res.json(err))
-  // });
-
-  //   // POST route for saving a new ingredient
-  // app.post("/api/ingredients", function(req, res) {
-  //   console.log(req.body.name);
-  //   db.Recipe.create({
-  //     //Should be req.body.name
-  //     name: req.body.name,
-  //   })
-  //   .then(function(dbRecipe) {
-  //     res.json(dbRecipe);
-  //   });
-  // });
-
-  // //Delete route for deleting ingredients
-  // app.delete("/api/ingredients/:id", function(req, res){
-  //   db.Ingredient.destroy({
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   }).then( function(dbRecipe) {
-  //     console.log("Api routes: DELETE works: \n", dbRecipe);
-  //     res.json(dbRecipe);
-  //   }).catch( err => res.json(err))
-  // });
-
-
-
-
-//"\n\tRecipe.name: ", req.body.addIngredient I had this on line 11, hopefully removing it makes this work

@@ -47,62 +47,12 @@
     <!-- Page Content -->
     <div class="container">
 
-      <div class="row">
-
-          <!-- Blog Post -->
-          <div class="container">>
-            <div class="card-body">
-          </div>
-
-        </div>
-
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-          <!-- Search Widget -->
-         <div class="ingredient-container">
-					<h1>What's in the Fridge?</h1>
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Name</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr id="form-row">
-								<form action="/recipes" id="ingredient-form">
-									<td colspan="4">
-										<input placeholder="Enter an Ingredient" id="ingredient" type="text" name="data[name]" />
-									</td>
-									<td><button type="submit" class="btn btn-success">Add Ingredient</button>
-									</td>
-								</form>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-          <!-- Side Widget -->
-          <div class="card my">
-            <h5 class="card-header">Recipes</h5>
-            <div class="card-body" id="ingredient-list">
-              <ul>
-                {{#each data}}
-                  <li>
-                    <p>name: {{name}}</p>
-                    <a href="/recipes/{{id}}">Ingredient Details</a>
-                  </li>
-                {{/each}}
-              </ul>            </div>
-          </div>
-
-        </div>
-
+      <div class="row" style="color:black; margin-top:100px;">
+          {{data.name}}
       </div>
       <!-- /.row -->
 
     </div>
-    <!-- /.container -->
 
     
     <!-- Bootstrap core JavaScript -->

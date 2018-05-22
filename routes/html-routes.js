@@ -19,6 +19,10 @@ module.exports = function(app) {
     res.render('index')
   });
 
+  app.get("/start", function(req, res) {
+    res.render('start')
+  });
+
 
 };
 

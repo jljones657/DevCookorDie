@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+var methodOverride = require("method-override");
 
 var app = express();
 var PORT = process.env.PORT || 8080;
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 
 //to be able to use page links
 app.use(express.static("public"));
+
+app.use(methodOverride("_method"));
 
 
 // Serve static content for the app from the "public" directory in the application directory.
