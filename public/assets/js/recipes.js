@@ -1,19 +1,21 @@
 //Wait to attach the handlers until the DOM is fully loaded
 $(document).ready(function() {
 
-    var newIngredient = $("#ingredient");
+    var newIngredient = $("#ingredient").val().trim();
     var ingredientContainer = $(".ingredient-form");
     var ingredientList = $(".tbody");
+    var editIngredient = $("#new-ingredient").val().trim()
 
     $(document).on("submit", "#ingredient-form", handleIngredientSubmission);
-    // $(document).on("click", ".delete-ingredient", handleDeleteButtonPress);
 
-    //Getting a list of Ingredients
-    getIngredients();
+    // // $(document).on("click", ".delete-ingredient", handleDeleteButtonPress);
+
+    // //Getting a list of Ingredients
+    // // getIngredients();
 
     //function for adding ingredient to the database
      function insertIngredient(ingredientData) {
-        $.post("/recipes", ingredientData).then(getIngredients);
+        $.post("/recipes", ingredientData).then(console.log(newIngredient));
         
     }
 
@@ -22,21 +24,34 @@ $(document).ready(function() {
         event.preventDefault();
         
         insertIngredient({
-            name: newIngredient.val().trim()
+            name: newIngredient
             
         });
         console.log(newIngredient);
     }
-    function updateRecipe(data) {
+
+    $("#edit-ingredients").on("submit", function(){
+
+    $.ajax({
+        method: "PUT",
+        url: "/recipes/:id",
+        data: {id: 1,
+            name: editIngredient}
+      }).then(editIngredient);
+      console.log(editIngredient)
+    
+    return false;
+  })
+
+ 
+    $("#destroy").on("click", function(){
         $.ajax({
-            method:"PUT",
-            url: "recipes/edit:id",
-            data: data
-        }).then(function(data){
-            console.log(data);
-            getData(data);
-        })
-    }
+            method: "DELETE",
+            url: "/recipes/:id" 
+          }).then(console.log("check database"));
+    })
+   
+  
 
 
 
@@ -53,29 +68,29 @@ $(document).ready(function() {
     // }
 
     //Getting Ingredients, and rendering them to the Page
-    function getIngredients() {
-        $.get("/recipes", function(data) {
-            var rowsToAdd = [];
-            for (var i = 0; i < data.length; i++) {
-                rowsToAdd.push(createIngredientRow(data[i]));
-            }
-            renderIngredientList(rowsToAdd);
-            newIngredient.val("");
-        });
-    }
+    // function getIngredients() {
+    //     $.get("/recipes", function(data) {
+    //         var rowsToAdd = [];
+    //         for (var i = 0; i < data.length; i++) {
+    //             rowsToAdd.push(createIngredientRow(data[i]));
+    //         }
+    //         renderIngredientList(rowsToAdd);
+    //         newIngredient.val("");
+    //     });
+    // }
     
      // A function for rendering the list of authors to the page
-    function renderAuthorList(rows) {
-        ingredientList.children().not(":last").remove();
-        ingredientContainer.children(".alert").remove();
-        if (rows.length) {
-            console.log(rows);
-            ingredientList.prepend(rows);
-        }
-        else {
-            renderEmpty();
-        }
-    }
+    // function renderAuthorList(rows) {
+    //     ingredientList.children().not(":last").remove();
+    //     ingredientContainer.children(".alert").remove();
+    //     if (rows.length) {
+    //         console.log(rows);
+    //         ingredientList.prepend(rows);
+    //     }
+    //     else {
+    //         renderEmpty();
+    //     }
+    // }
  
     // Function for handling what happens when the delete button is pressed
     // function handleDeleteButtonPress() {
@@ -92,3 +107,18 @@ $(document).ready(function() {
 
 
 });
+
+
+
+// $("#edit-ingredients").on("submit", function(){
+
+//     $.ajax({
+//         method: "PUT",
+//         url: "/recipes/:id",
+//         data: {id: 1,
+//             name: editIngredient}
+//       }).then(editIngredient);
+//       console.log(editIngredient)
+    
+//     return false;
+//   })

@@ -48,20 +48,25 @@ module.exports = function(app){
   })
 
   app.put("/recipes/:id", function(req,res){
-    console.log(req.body);
-    db.Recipe.update({
-      name: req.body.name,
+     db.Recipe.update({
+      name: req.body.name
     }, {
       where: {
-        id: req.body.data
+        id: req.body.id
       }
     }).then(function(data) {
-      if(err){
-        res.redirect("/recipes");
-      }else {
-        res.redirect("/recipes" + req.params.id );
-      }    
+      res.json(data);
     });
   });
+
+  app.delete("/recipes/:id", function(req, res){
+   db.Recipe.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(data) {
+    res.json(data);
+  });
+  })
  
 };
