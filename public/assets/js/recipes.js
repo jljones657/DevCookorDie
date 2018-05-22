@@ -5,6 +5,8 @@ $(document).ready(function() {
     var ingredientContainer = $(".ingredient-form");
     var ingredientList = $(".tbody");
     var editIngredient = $("#new-ingredient").val().trim()
+    
+    
 
     $(document).on("submit", "#ingredient-form", handleIngredientSubmission);
 
