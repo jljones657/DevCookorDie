@@ -60,14 +60,9 @@
         <div class="col-md-4">
 
           <!-- Search Widget -->
-         <div class="ingredient-container">
+         <div>
 					<h1>What's in the Fridge?</h1>
 					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Name</th>
-							</tr>
-						</thead>
 						<tbody>
 							<tr id="form-row">
 								<form id="ingredient-form">
@@ -85,18 +80,48 @@
           <!-- Side Widget -->
           <div class="card my">
             <h5 class="card-header">Recipes</h5>
-            <div class="card-body">
+            <div class="card-body" id="ingredient-form">
+              <ul>
+                {{#each ingredient}}
+                  <li>
+                    <p>name: {{name}}</p>
+                    <a href="/api/ingredients/{{id}}">Ingredient Details</a>
+                    <button type="submit" id="destroy" class="btn btn-success">Delete</button>
+                  </li>
+                {{/each}}
+              </ul>            
             </div>
           </div>
 
-        </div>
 
+        </div>
       </div>
       <!-- /.row -->
 
+    <div class="row">
+        <div class="col-md-6 ingredient-container">
+          <div class="jumbotron">
+            <table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Ingredient</th>
+								<th>Delete Ingredient</th>
+							</tr>
+						</thead>
+            <tbody>
+							<tr id="form-row">
+								<form id="ingredient-form">
+								</form>
+							</tr>
+						</tbody>
+          </div>
+        </div>
+      </div>
+
     </div>
     <!-- /.container -->
-    <a class="btn btn-primary" href="/">Home</a>
+      
+    {{!-- <a class="btn btn-primary" href="/">Home</a> --}}
 
     
     <!-- Bootstrap core JavaScript -->

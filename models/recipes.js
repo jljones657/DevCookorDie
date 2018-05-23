@@ -5,10 +5,28 @@ module.exports = function(sequelize, DataTypes) {
     // disable timestamps
     timestamps: false
   });
-      
 
+  Recipe.associate = function(models) {
+    Recipe.belongsToMany(models.Ingredient, {
+      through: "recipe_ingredients"
+    });
+  };
+      
   return Recipe;
 };
+
+
+
+// db.Recipe
+//   .findOne({ 
+//       where :{
+//         id: req.params.id
+//       }, 
+//       include: [ db.Ingredients ]
+//     })
+//   .then( recipe => {
+//     // recipe.Ingedients
+//   } )
 
 
 
