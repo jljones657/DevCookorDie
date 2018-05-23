@@ -1,114 +1,132 @@
-//Wait to attach the handlers until the DOM is fully loaded
-$(document).ready(function() {
 
-    var newIngredient = $("#ingredient").val().trim();
-    var ingredientContainer = $(".ingredient-form");
-    var ingredientList = $(".tbody");
-    var editIngredient = $("#new-ingredient").val().trim()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //Wait to attach the handlers until the DOM is fully loaded
+// $(document).ready(function() {
+
+//     var newIngredient = $("#ingredient")
+//     var ingredientContainer = $(".ingredient-form");
+//     var ingredientList = $(".tbody");
+//     var editIngredient = $("#new-ingredient").val().trim()
     
     
+// alert("Hellos")
+//     $(document).on("submit", "#ingredient-form", handleIngredientSubmission);
 
-    $(document).on("submit", "#ingredient-form", handleIngredientSubmission);
+//     // // $(document).on("click", ".delete-ingredient", handleDeleteButtonPress);
 
-    // // $(document).on("click", ".delete-ingredient", handleDeleteButtonPress);
+//     // //Getting a list of Ingredients
+//     // // getIngredients();
 
-    // //Getting a list of Ingredients
-    // // getIngredients();
-
-    //function for adding ingredient to the database
-     function insertIngredient(ingredientData) {
-        $.post("/recipes", ingredientData).then(console.log(newIngredient));
+//     //function for adding ingredient to the database
+//      function insertIngredient(ingredientData) {
+//         $.post("/recipes", ingredientData).then(console.log(newIngredient));
         
-    }
+//     }
 
-    //A Function to handle what happens when I want to add an Ingredient to the database
-    function handleIngredientSubmission(event) {
-        event.preventDefault();
+//     //A Function to handle what happens when I want to add an Ingredient to the database
+//     function handleIngredientSubmission(event) {
+//         event.preventDefault();
         
-        insertIngredient({
-            name: newIngredient
+//         insertIngredient({
+//             name: newIngredient.val().trim()
             
-        });
-        console.log(newIngredient);
-    }
+//         });
+//         console.log(newIngredient);
+//     }
 
-    $("#edit-ingredients").on("submit", function(){
+//     $("#edit-ingredients").on("submit", function(){
 
-    $.ajax({
-        method: "PUT",
-        url: "/recipes/:id",
-        data: {id: 1,
-            name: editIngredient}
-      }).then(editIngredient);
-      console.log(editIngredient)
+//     $.ajax({
+//         method: "PUT",
+//         url: "/recipes/:id",
+//         data: {
+//             id: 1, 
+//             name: editIngredient
+//         }
+//       }).then(editIngredient);
+//       console.log(editIngredient)
     
-    return false;
-  })
+//     return false;
+//   })
 
  
-    $("#destroy").on("click", function(){
-        $.ajax({
-            method: "DELETE",
-            url: "/recipes/:id" 
-          }).then(console.log("check database"));
-    })
+//     // $("#destroy").on("click", function(){
+//     //     $.ajax({
+//     //         method: "DELETE",
+//     //         url: "/recipes/:id" 
+//     //       }).then(console.log("check database"));
+//     // })
    
   
 
 
 
-    // //Function for showing a list of ingredients
-    // function createIngredientsRow(ingredientData) {
-    //     var newTr = $("<tr>");
+//     // //Function for showing a list of ingredients
+//     // function createIngredientsRow(ingredientData) {
+//     //     var newTr = $("<tr>");
 
-    //     newTr.data("ingredient", ingredientData);
-    //     newTr.append("<td>" + ingredientData.name + "</td>");
-    //     newTr.append("<td><a style='cursor:pointer;color:red' class='delete-ingredient'>Delete Author</a></td>");
+//     //     newTr.data("ingredient", ingredientData);
+//     //     newTr.append("<td>" + ingredientData.name + "</td>");
+//     //     newTr.append("<td><a style='cursor:pointer;color:red' class='delete-ingredient'>Delete Author</a></td>");
         
-    //     $("#ingredient-list").prepend(newTr);
+//     //     $("#ingredient-list").prepend(newTr);
 
-    // }
+//     // }
 
-    //Getting Ingredients, and rendering them to the Page
-    // function getIngredients() {
-    //     $.get("/recipes", function(data) {
-    //         var rowsToAdd = [];
-    //         for (var i = 0; i < data.length; i++) {
-    //             rowsToAdd.push(createIngredientRow(data[i]));
-    //         }
-    //         renderIngredientList(rowsToAdd);
-    //         newIngredient.val("");
-    //     });
-    // }
+//     //Getting Ingredients, and rendering them to the Page
+//     // function getIngredients() {
+//     //     $.get("/recipes", function(data) {
+//     //         var rowsToAdd = [];
+//     //         for (var i = 0; i < data.length; i++) {
+//     //             rowsToAdd.push(createIngredientRow(data[i]));
+//     //         }
+//     //         renderIngredientList(rowsToAdd);
+//     //         newIngredient.val("");
+//     //     });
+//     // }
     
-     // A function for rendering the list of authors to the page
-    // function renderAuthorList(rows) {
-    //     ingredientList.children().not(":last").remove();
-    //     ingredientContainer.children(".alert").remove();
-    //     if (rows.length) {
-    //         console.log(rows);
-    //         ingredientList.prepend(rows);
-    //     }
-    //     else {
-    //         renderEmpty();
-    //     }
-    // }
+//      // A function for rendering the list of authors to the page
+//     // function renderAuthorList(rows) {
+//     //     ingredientList.children().not(":last").remove();
+//     //     ingredientContainer.children(".alert").remove();
+//     //     if (rows.length) {
+//     //         console.log(rows);
+//     //         ingredientList.prepend(rows);
+//     //     }
+//     //     else {
+//     //         renderEmpty();
+//     //     }
+//     // }
  
-    // Function for handling what happens when the delete button is pressed
-    // function handleDeleteButtonPress() {
-    //     var listItemData = $(this).parent("td").parent("tr").data("author");
-    //     var id = listItemData.id;
-    //     $.ajax({
-    //         method: "DELETE",
-    //         url: "/api/ingredients/" + id
-    //     })
-    //     .then(getIngredients);
-    // }
+//     // Function for handling what happens when the delete button is pressed
+//     // function handleDeleteButtonPress() {
+//     //     var listItemData = $(this).parent("td").parent("tr").data("author");
+//     //     var id = listItemData.id;
+//     //     $.ajax({
+//     //         method: "DELETE",
+//     //         url: "/api/ingredients/" + id
+//     //     })
+//     //     .then(getIngredients);
+//     // }
 
 
 
 
-});
+// });
 
 
 

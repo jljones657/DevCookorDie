@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 var methodOverride = require("method-override");
+var multer = require("multer");
+
 
 var app = express();
 var PORT = process.env.PORT || 8080;
@@ -15,6 +17,7 @@ app.use(bodyParser.json());
 
 //to be able to use page links
 app.use(express.static("public"));
+app.use(express.static("images"));
 
 app.use(methodOverride("_method"));
 
