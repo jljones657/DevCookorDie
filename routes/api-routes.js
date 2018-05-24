@@ -33,9 +33,10 @@ module.exports = function(app){
 
   });
 
-  app.get("/recipes/new", function(req, res){
-    res.render("new");
-  })
+  
+  // app.get("/recipes/new", function(req, res){
+  //   res.render("new");
+  // })
 
 
   app.post("/recipes", function(req, res) {
@@ -87,4 +88,15 @@ module.exports = function(app){
   });
   })
  
+  app.get("/recipes", function(req, res){
+    db.Recipe.findAll({
+      include: [{
+        model: db.Ingredient,
+        through: {
+          attributes: ['id'],
+          where: {completed: true}
+        }
+      }]
+    })
+  });
 };

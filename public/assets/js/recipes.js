@@ -32,7 +32,7 @@ $(document).ready(function() {
 
     //function for putting a mother fucking ingredient in the mother fuckin' database
     function insertIngredient(ingredientData) {
-        $.post("/api/ingredients", ingredientData).then(getIngredients);
+        $.post("/recipes", ingredientData).then(getIngredients);
     }
 
     // //Function for showing a list of ingredients

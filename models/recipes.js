@@ -1,22 +1,74 @@
-module.exports = function(sequelize, DataTypes){
-  var Recipe = sequelize.define("Recipe",{
+module.exports = function(sequelize, DataTypes) {
+  var Recipe = sequelize.define("Recipe", {
+      name: DataTypes.STRING,
+  }, {
+    // disable timestamps
+    // timestamps: false
+  });
+
+  Recipe.associate = function(models) {
+    Recipe.belongsToMany(models.Ingredient, {
+      through: "recipe_ingredients"
+    });
+  };
+Recipe.associate = (models) => {
+  Recipe.hasMany(models.Ingredient,{
+    foreingKey: "name",
+
+  });
+
+}
+
+// return Ingredient;  
+  return Recipe;
+};
+
+// module.exports = function(sequelize, DataTypes) {
+//   var Recipes = sequelize.define("Recipes", {
+//       name: DataTypes.STRING,
+//   }, {
+//     // disable timestamps
+//     // timestamps: false
+//   });
+
+//   // Ingredient.associate = function(models){
+//   //   Ingredient.belongsToMany(models.Recipe, {
+//   //       through: "recipe_ingredients"
+//   //   });
+//   // };
+
+//   Recipes.associate = (models) => {
+//     Recipe.hasMany(models.Ingredient,{
+//       foreingKey: "name",
+
+//     });
+
+//   }
+
+//   return Recipes;
+// };
+
+
+
+// module.exports = function(sequelize, DataTypes){
+//   var Recipe = sequelize.define("Recipe",{
   
-    name: DataTypes.STRING,
+//     name: DataTypes.STRING,
     
   
-  }, {
-    price: DataTypes.INTEGER
-  },
-  {
-    productImage: DataTypes.STRING
-  },
-  {
+//   }, {
+//     price: DataTypes.INTEGER
+//   },
+//   {
+//     productImage: DataTypes.STRING
+//   },
+//   {
 
-    timestamps: false
-  }
-)
-  return Recipe;
-}
+//     timestamps: false
+//   }
+// )
+//   return Recipe;
+// }
 
 // var userData = [{
 //   name: "Chile Relleno",
