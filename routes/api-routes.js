@@ -15,7 +15,7 @@ module.exports = function(app) {
     db.Ingredient.findAll({}).then( function (dbRecipe) {
       console.log ("Api routes all the ingredient objects \n ", dbRecipe);
       res.render("index", {ingredient:dbIngredient})
-      res.json(dbRecipe);
+      // res.json(dbRecipe);
     }).catch( err => res.json(err))
   });
 
@@ -97,9 +97,9 @@ module.exports = function(app) {
     
 // });
 
-  app.get("/", function(req, res){
-    res.redirect("/recipes");
-  })
+  // app.get("/", function(req, res){
+  //   res.redirect("/recipes");
+  // })
   app.get("/recipes", function(req, res) {
     // Add sequelize code to find all posts, and return them to the user with res.json
     db.Ingredient.findAll({})

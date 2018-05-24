@@ -1,32 +1,35 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
+//Bring in the clowns... i.e lets require some libraries (the packages our program is dependend on).
+
+var express = require('express');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+
+var PORT = process.env.PORT || 3000;
 
 var app = express();
-var PORT = process.env.PORT || 8080;
 
 var db = require("./models")
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-// parse application/json
-app.use(bodyParser.json());
+// Serve static content for the app from the 'public' directory. (Allows our app to pull from our public directory.)
+app.use(express.static(process.cwd() + '/public'));
 
-// Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// Set Handlebars.
-const exphbs = require("express-handlebars");
+// Override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
 
-app.engine("handlebars", exphbs({ defaultLayout: "main"}));
-app.set("view engine", "handlebars");
+// Set Handlebars as the view engine
+var exphbs = require('express-handlebars');
 
-// Static directory
-app.use(express.static("public"));
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
-// Import routes and give the server access to them.
+// Import routes and give the server access to them
 require("./routes/api-routes.js")(app);
-require("./routes/html-routes.js")(app);
+var routes = require('./routes/html-routes.js');
+routes(app);
+
+//app.use('/', routes);
 
 db.sequelize.sync({}).then(function() {
   app.listen(PORT, function() {

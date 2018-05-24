@@ -1,66 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-
-    <head>
+<head>
+  <link rel= "icon" href = "favicon.png" type="image/gif" sizes="16X16">
+   
         <meta charset="UTF-8">
-          <title>Cook or Die</title>
-          <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet">
-          <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
-          <script src="https://code.jquery.com/jquery.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-      
-          <!-- Custom fonts for this template -->
-          <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-          <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-          <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-      
-          <!-- Custom styles for this template -->
-          <link href="../../public/assets/css/style.css" rel="stylesheet">
-          <title>Cook Or Die!</title>
-          <script src="https://code.jquery.com/jquery.js"></script>
-          <script src="/assets/js/recipes.js"></script>
-      </head>
 
-  <body>
+ <!--Fonts-->
+ <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light static-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">Start Cooking</a>
-        <a class="btn btn-primary" href="/recipes">Sign In</a>
-      </div>
-    </nav>
+<!-- Bootstrap CSS -->
 
-    <!-- Masthead -->
-    <header class="masthead text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <h1 class="mb-5">Find some Recipes!</h1>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-              <div class="form-row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0">
-                  <input type="email" class="form-control form-control-lg" placeholder="Search a Recipe...">
-                </div>
-                <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary">Search</button>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="login.css" />
+
+    <title> Cook or Die </title>
+</head>
+
+
+<body>
+
+<!---Sets up the Nav Bar for the Login Page -->   
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="landing.html">Cook or Die!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          <p>
+         <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Who are we?</button>
+                <div class="col">
+                  <div class="collapse multi-collapse" id="multiCollapseExample2">
+                    <div class="card card-body">
+                      Cook or Die is a fun and friendly app designed to make it breeze to keep track of the food in your pantry by using its picture friendly database.
+                      Log in to check it out!
+                    </div>
+                  </div>
                 </div>
               </div>
-            </form>
-          </div>
+<span class="navbar-text">
+          </span>
         </div>
-      </div>
-    </header>
+      </nav>
+
+
+<!---Sets up the Modal for the Login Page --->
+
+    <div class= "modal-dialog text-center">
+        <div class= "col-sm-8 main-section">
+            <div class= "modal-content">
+
+                <!-- This is picture -->       
+                <div class= "col-12 user-img">
+                    <img src="C:\Users\Chelsea\Pictures\foodieninjavector 1.0.png" width="300px">
+    
+                </div>
+
+                <!--- This is the beginning of the form content -->
+                <form id = "login" class="col-12">
+                    <div class="form-group">
+                        <input id="email" type= "text" class="form-control" placeholder="Enter Username">
+                    </div>
+                    <div class="form-group">
+                        <input id ="pass" type= "password" class="form-control" placeholder="Enter Password">
+                    </div>
+
+                    <!---Login Button -->
+        
+                    <button type="submit" class="btn"><i class= "fas fa-sign-in-alt" onclick="send_me()"> <a href="/recipes"> Login </button>
+                        <button id="signup" class="btn"><i class= "fas fa-sign-in-alt">Sign Up</button>
+                </form>
+
+                <!--- Forgot Password Text -->
+                <div class= "col-12 forgot">
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+<!---End of Modal Content -->
+
+    
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- Firebase App is always required and must be first -->
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-app.js"></script>
+
+<!-- Add additional services you want to use -->
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-functions.js"></script>
+
+<!-- Comment out (or don't include) services you don't want to use -->
+<!-- <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase-storage.js"></script> -->
+
+<script>
+    var config = {
+    apiKey: "AIzaSyDUougqDjLY3-aV9tgdarUT29DKLjAhY6o",
+    authDomain: "cookordie-1.firebaseapp.com",
+    databaseURL: "https://cookordie-1.firebaseio.com",
+    projectId: "cookordie-1",
+    storageBucket: "cookordie-1.appspot.com",
+    messagingSenderId: "412450931497"
+  };
+
+  firebase.initializeApp(config);
+
+$("#signup").on("click", function(e){
+    e.preventDefault();
+    var email = $("#email").val().trim();
+    var password =$("#pass").val().trim();
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+})
+
+$("#login").on("submit", (e) => {
+    e.preventDefault();
+    var email = $("#email").val().trim();
+    var password =$("#pass").val().trim();
+    console.log(email);
+    console.log(password);
+
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+})
+
+
+firebase.auth().onAuthStateChanged(function(user) {
 
 
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  if (user) {
+    // User is signed in.
+    console.log ("usersignedin");
+    console.log (user); 
+    var displayName = user.displayName;
+    var email = user.email;
+    var emailVerified = user.emailVerified;
+    var photoURL = user.photoURL;
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    var providerData = user.providerData;
+    
+    /// redirect to index page
+    // ...
+    function send_me(){
+      window.location.href='landing.html';
+      console.log("welcome");
+    }
+  
+  } else {
+      console.log("usersignedout");
+    // User is signed out.
+    // ...
+  }
+});
 
-  </body>
+</script>
+</body>
 
+
+   
 </html>
