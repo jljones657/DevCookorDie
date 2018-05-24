@@ -3,23 +3,10 @@ var  Ingredient = require("../models").Ingredient;
 var  Recipe = require("../models").Recipe;
 
 module.exports = function(app) {
-  app.post("/recipes", function(req, res) {
-    Recipe.create({
-      name:"Spaguetti"
-    }).then(function(dbRecipe) {
-      dbRecipe.createIngredient({
-        name: "onion",
-        type:"vegetable"
-      }).then(function(){
-        console.log("it worked")
-      });
-  
-    });
-  });
 
   //Route for creating Ingredients
   app.post("/recipes", function(req, res) {
-    db.Ingredient.create(req.body).then(function(dbRecipe) {
+    Recipe.create(req.body).then(function(dbRecipe) {
       res.json(dbRecipe);
     });
   });
@@ -46,13 +33,17 @@ module.exports = function(app) {
    app.get("/", function(req, res){
     res.redirect("/recipes");
   })
-  app.get("/recipes", function(req, res) {
-    // Add sequelize code to find all posts, and return them to the user with res.json
-    db.Ingredient.findAll({})
-    .then(function(dbIngredient){
-      res.render("index", { data:dbIngredient })
-    })
-  });
+
+
+  // app.get("/recipes", function(req, res) {
+  //   // Add sequelize code to find all posts, and return them to the user with res.json
+  //   db.Ingredient.findAll({})
+  //   .then(function(dbIngredient){
+  //     res.render("index", { data:dbIngredient })
+  //   })
+  // });
+
+
 
    //Delete route for deleting ingredients
   // app.delete("/api/ingredients/:id", function(req, res){
@@ -190,7 +181,53 @@ module.exports = function(app) {
      
 // });
 
+// app.post("/recipes", function(req, res) {
+//   Recipe.create({
+//     name:"Spaguetti"
+//   }).then(function(dbRecipe) {
+//     dbRecipe.createIngredient({
+//       name: "onion",
+//       type:"vegetable"
+//     }).then(function(){
+//       console.log("it worked")
+//     });
 
+//   });
+// });
+
+
+app.get("/recipes",function(req, res) {
+  Recipe.findAll({
+    include:[Ingredient]
+  }).then(function(recipe){
+      res.render("index", { recipe:recipe })
+  })
+})
+
+// app.get("/recipes",function(req, res) {
+//   Ingredient.findAll({
+//     include:[Recipe]
+//   }).then(function(ingredient){
+//       res.render("index", { ingredient:ingredient })
+//   })
+// })
+
+
+
+// app.post("/recipes", function(req, res){
+//   Recipe.create({name: req.body.name})
+//   .then(function(){
+//     res.redirect("/recipes")
+//   })
+// })
+
+app.post("/recipes/:recipe_id", function(req, res){
+  Ingredient.create({
+    ...req.body, RecipeId: req.params.recipe_id })
+    .then(function(){
+      res.redirect("/recipes")
+    })
+})
 
 
 }

@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
 // recipe has many ingredients
   Recipe.associate = function(models) {
     Recipe.hasMany(models.Ingredient, {
-      through: "recipe_ingredients"
+      // through: "recipe_ingredients"
     });
   };
       
