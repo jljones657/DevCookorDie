@@ -54,46 +54,48 @@ module.exports = function(app) {
 
 
   //find all the recipes associated with the entered ingredients
-  app.get("/api/recipes", (req, res) => {
-    console.log('foo');
-    // console.log(req.query);
-    db.Ingredient.findOne({
-        where: {
-            name: req.query.name
-        },
-        include: [
-            { model: db.Recipe },
-        ]
-    }).then((ingredient) => {
-      // logic
-        const results = {};
+  // app.get("/recipes", (req, res) => {
+  //   console.log('foo');
+  //   // console.log(req.query);
+  //   db.Ingredient.findOne({
+  //       where: {
+  //           name: req.query.name
+  //       },
+  //       include: [
+  //           { model: db.Recipe },
+  //       ]
+  //   }).then(function(results){
+  //     res.render("index", { info:results });
+  //     console.log(results);
+  //   }).catch( err => res.json(err));
+    
+    // .then((ingredient) => {
+    //   // logic
+    //     const results = {};
 
-        const recipes = ingredient.Recipes;
+    //     const recipes = ingredient.Recipes;
 
-        for (var i = 0; i < recipes.length; i++) {
-          results[i] = recipes[i].name
-        }
+    //     for (var i = 0; i < recipes.length; i++) {
+    //       results[i] = recipes[i].name
+    //     }
 
-        res.json({
-          recipes: recipes,
-          results: results
-        });
-        console.log(results);
-        // res.render("index", {info:results})
-    }).catch((err) => {
-        res.json(err);
-    });
+    //     res.json({
+    //       recipes: recipes,
+    //       results: results
+    //     });
+    //     console.log(results);
+    //     // res.render("index", {info:results})
+    // }).catch((err) => {
+    //     res.json(err);
+    // });
 
     
     // //Code that I want to use with handlebars
-    // then(function(results){
-    //   res.render("index", { info:results });
-    //   console.log(results);
-    // }).catch( err => res.json(err));
     
     
     
-});
+    
+// });
 
   app.get("/", function(req, res){
     res.redirect("/recipes");
