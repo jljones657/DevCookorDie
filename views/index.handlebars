@@ -102,11 +102,11 @@
             <h5 class="card-header">Recipes</h5>
             <div class="card-body" id="ingredient-form">
               <ul>
-                {{#each info}}
+                {{#each results}}
                   <li>
                     <p>name: {{name}}</p>
-                    <a href="/api/recipes/{{id}}">Recipe Details</a>
-                    {{!-- <button type="submit" id="delete-ingredient" class="delete-ingredient">Delete</button> --}}
+                    <a href="/api/ingredients/{{id}}">Recipe Details</a>
+                    <button type="submit" id="delete-ingredient" class="delete-ingredient">Delete</button>
                   </li>
                 {{/each}}
               </ul>            

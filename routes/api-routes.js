@@ -57,37 +57,42 @@ module.exports = function(app) {
   app.get("/api/recipes", (req, res) => {
     console.log('foo');
     // console.log(req.query);
-    db.Ingredient.findAll({
+    db.Ingredient.findOne({
         where: {
             name: req.query.name
         },
         include: [
             { model: db.Recipe },
         ]
-    }).then(function(results){
-      res.render("index", { info:results });
-      res.json(results);
-    }).catch( err => res.json(err));
+    }).then((ingredient) => {
+      // logic
+        const results = {};
+
+        const recipes = ingredient.Recipes;
+
+        for (var i = 0; i < recipes.length; i++) {
+          results[i] = recipes[i].name
+        }
+
+        res.json({
+          recipes: recipes,
+          results: results
+        });
+        console.log(results);
+        // res.render("index", {info:results})
+    }).catch((err) => {
+        res.json(err);
+    });
+
+    
+    // //Code that I want to use with handlebars
+    // then(function(results){
+    //   res.render("index", { info:results });
+    //   console.log(results);
+    // }).catch( err => res.json(err));
     
     
-    // .then((ingredient) => {
-    //   // logic
-    //     const results = {};
-
-    //     const recipes = ingredient.Recipes;
-
-    //     for (var i = 0; i < recipes.length; i++) {
-    //       results[i] = recipes[i].name
-    //     }
-
-    //     res.json({
-    //       recipes: recipes,
-    //       results: results
-    //     });
-    //     res.render("index", {info:results})
-    // }).catch((err) => {
-    //     res.json(err);
-    // });
+    
 });
 
   app.get("/", function(req, res){
