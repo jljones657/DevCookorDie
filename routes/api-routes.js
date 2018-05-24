@@ -7,7 +7,7 @@ module.exports = function(app) {
   //Route for creating Ingredients
   app.post("/recipes", function(req, res) {
     Recipe.create(req.body).then(function(dbRecipe) {
-      res.json(dbRecipe);
+      res.redirect("/recipes")
     });
   });
 

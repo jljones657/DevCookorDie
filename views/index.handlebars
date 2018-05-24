@@ -87,7 +87,7 @@
 
         <form action="/recipes" method="post" class="shop-form column" id="ingredient-form">
           <input type="text" name="name" placeholder="Recipe Name" id="ingredient" name="data[name]">
-          <button>Submit</button>
+          <button id="submit">Submit</button>
         </form>
 
         <h1 class="shop-header">Awesome Recipes</h1>
@@ -110,7 +110,7 @@
 					<p>{{name}}</p>
 				</div>
 			{{else}}
-				<h4 class="empty">No coffees have been added.</h4>
+				<h4 class="empty">No ingredients have been added.</h4>
 			{{/each}}
 		</div>
 	{{/each}}

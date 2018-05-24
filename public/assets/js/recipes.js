@@ -28,7 +28,9 @@ $(document).ready(function() {
             .val()
             .trim()
         });
-    }
+
+        window.location.reload();
+        }
 
     //function for putting a mother fucking ingredient in the mother fuckin' database
     function insertIngredient(ingredientData) {
