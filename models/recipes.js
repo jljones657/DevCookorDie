@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
       name: DataTypes.STRING,
   }, {
     // disable timestamps
-    timestamps: false
+    // timestamps: false
   });
 
   Recipe.associate = function(models) {
