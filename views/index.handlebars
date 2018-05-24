@@ -79,14 +79,14 @@
 
           <!-- Side Widget -->
           <div class="card my">
-            <h5 class="card-header">Recipes</h5>
+            <h5 class="card-header">Ingredients</h5>
             <div class="card-body" id="ingredient-form">
               <ul>
-                {{#each ingredient}}
+                {{#each data}}
                   <li>
                     <p>name: {{name}}</p>
                     <a href="/api/ingredients/{{id}}">Ingredient Details</a>
-                    <button type="submit" id="destroy" class="btn btn-success">Delete</button>
+                    <button type="submit" id="delete-ingredient" class="delete-ingredient">Delete</button>
                   </li>
                 {{/each}}
               </ul>            
@@ -98,25 +98,20 @@
       </div>
       <!-- /.row -->
 
-    <div class="row">
-        <div class="col-md-6 ingredient-container">
-          <div class="jumbotron">
-            <table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Ingredient</th>
-								<th>Delete Ingredient</th>
-							</tr>
-						</thead>
-            <tbody>
-							<tr id="form-row">
-								<form id="ingredient-form">
-								</form>
-							</tr>
-						</tbody>
+    <div class="card my">
+            <h5 class="card-header">Recipes</h5>
+            <div class="card-body" id="ingredient-form">
+              <ul>
+                {{#each results}}
+                  <li>
+                    <p>name: {{name}}</p>
+                    <a href="/api/ingredients/{{id}}">Recipe Details</a>
+                    <button type="submit" id="delete-ingredient" class="delete-ingredient">Delete</button>
+                  </li>
+                {{/each}}
+              </ul>            
+            </div>
           </div>
-        </div>
-      </div>
 
     </div>
     <!-- /.container -->

@@ -32,50 +32,50 @@ $(document).ready(function() {
         $.post("/api/ingredients", ingredientData).then(getIngredients);
     }
 
-    //Function for showing a list of ingredients
-    function createIngredientsRow(ingredientData) {
-        var newTr = $("<tr>");
-        newTr.data("ingredient", ingredientData);
-        newTr.append("<td>" + ingredientData.name + "</td>");
-        newTr.append("<td><a style='cursor:pointer;color:red' class='delete-ingredient'>Delete Author</a></td>");
-        return newTr;
-    }
+    // //Function for showing a list of ingredients
+    // function createIngredientsRow(ingredientData) {
+    //     var newTr = $("<tr>");
+    //     newTr.data("ingredient", ingredientData);
+    //     newTr.append("<td>" + ingredientData.name + "</td>");
+    //     newTr.append("<td><a style='cursor:pointer;color:red' class='delete-ingredient'>Delete Author</a></td>");
+    //     return newTr;
+    // }
 
-    // //Getting Ingredients, and rendering them to the Page
-    function getIngredients() {
-        $.get("/api/ingredients", function(data) {
-            var rowsToAdd = [];
-            for (var i = 0; i < data.length; i++) {
-                rowsToAdd.push(createIngredientRow(data[i]));
-            }
-            renderIngredientList(rowsToAdd);
-            newIngredient.val("");
-        });
-    }
+    // // //Getting Ingredients, and rendering them to the Page
+    // function getIngredients() {
+    //     $.get("/api/ingredients", function(data) {
+    //         var rowsToAdd = [];
+    //         for (var i = 0; i < data.length; i++) {
+    //             rowsToAdd.push(createIngredientRow(data[i]));
+    //         }
+    //         renderIngredientList(rowsToAdd);
+    //         newIngredient.val("");
+    //     });
+    // }
     
-     // A function for rendering the list of authors to the page
-    function renderIngredientList(rows) {
-        ingredientList.children().not(":last").remove();
-        ingredientContainer.children(".alert").remove();
-        if (rows.length) {
-            console.log(rows);
-            ingredientList.prepend(rows);
-        }
-        else {
-            renderEmpty();
-        }
-    }
+    //  // A function for rendering the list of authors to the page
+    // function renderIngredientList(rows) {
+    //     ingredientList.children().not(":last").remove();
+    //     ingredientContainer.children(".alert").remove();
+    //     if (rows.length) {
+    //         console.log(rows);
+    //         ingredientList.prepend(rows);
+    //     }
+    //     else {
+    //         renderEmpty();
+    //     }
+    // }
 
-    function renderEmpty() {
-        var alertDiv = $("<div>");
-        alertDiv.addClass("alert alert-danger");
-        alertDiv.text("You must submit and Ingredient");
-        ingredientContainer.append(alertDiv);
-    }
+    // function renderEmpty() {
+    //     var alertDiv = $("<div>");
+    //     alertDiv.addClass("alert alert-danger");
+    //     alertDiv.text("You must submit and Ingredient");
+    //     ingredientContainer.append(alertDiv);
+    // }
  
     // Function for handling what happens when the delete button is pressed
     function handleDeleteButtonPress() {
-        var listItemData = $(this).parent("td").parent("tr").data("ingredient");
+        var listItemData = $(this);
         var id = listItemData.id;
         $.ajax({
             method: "DELETE",

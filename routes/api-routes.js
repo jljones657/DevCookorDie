@@ -21,26 +21,88 @@ module.exports = function(app) {
 
 
   //Delete route for deleting ingredients
-  app.delete("/api/ingredients/:id", function(req, res){
-    db.Ingredient.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then( function(dbRecipe) {
-      console.log("Api routes: DELETE works: \n", dbRecipe);
-      res.json(dbRecipe);
-    }).catch( err => res.json(err))
-  });
+  // app.delete("/api/ingredients/:id", function(req, res){
+  //   db.Ingredient.destroy({
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   }).then(function(data) {
+  //     res.json(data);
+  //   });
+  // });
 
-  app.get("/api/recipes", function(req, res){
-    db.Recipe.findAll({
-      include: [{
-        model: db.Ingredient,
-        through: {
-          attributes: ['id'],
-          where: {completed: true}
+  app.delete("/recipes/:id", function(req, res){
+    db.Ingredient.destroy({
+     where: {
+       id: req.params.id
+     }
+   }).then(function(data) {
+     res.json(data);
+   });
+   })
+
+  // app.get("/api/recipes", function(req, res){
+  //   db.Ingredient.findAll({
+  //     include: [{
+  //       model: db.Recipe,
+  //       through: {
+  //         where: { state: Sequelize.col("ingredient.state") }
+  //       }
+  //     }]
+  //   })
+  // });
+
+
+  //find all the recipes associated with the entered ingredients
+  app.get("/api/recipes", (req, res) => {
+    console.log('foo');
+    // console.log(req.query);
+    db.Ingredient.findOne({
+        where: {
+            name: req.query.name
+        },
+        include: [
+            { model: db.Recipe },
+        ]
+    }).then((ingredient) => {
+      // logic
+        const results = {};
+
+        const recipes = ingredient.Recipes;
+
+        for (var i = 0; i < recipes.length; i++) {
+          results[i] = recipes[i].name
         }
-      }]
+
+        res.json({
+          recipes: recipes,
+          results: results
+        });
+        console.log(results);
+        // res.render("index", {info:results})
+    }).catch((err) => {
+        res.json(err);
+    });
+
+    
+    // //Code that I want to use with handlebars
+    // then(function(results){
+    //   res.render("index", { info:results });
+    //   console.log(results);
+    // }).catch( err => res.json(err));
+    
+    
+    
+});
+
+  app.get("/", function(req, res){
+    res.redirect("/recipes");
+  })
+  app.get("/recipes", function(req, res) {
+    // Add sequelize code to find all posts, and return them to the user with res.json
+    db.Ingredient.findAll({})
+    .then(function(dbIngredient){
+      res.render("index", { data:dbIngredient })
     })
   });
 
