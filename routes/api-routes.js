@@ -1,12 +1,5 @@
 var db = require("../models");
-var multer = require("multer");
-var upload = multer({storage: storage});
-var storage = multer.diskStorage({
-  destination: function(req, file, cb){
-    cb(null, "./images");
-  },
-  filename: function(req, file, cb){
-  cb(null, new Date().toISOString() + file.originalname);
+
   }
 })
 var filefilter = (req, file, cb) =>{
