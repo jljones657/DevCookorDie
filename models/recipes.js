@@ -9,13 +9,35 @@ module.exports = function(sequelize, DataTypes) {
   },{});
 // recipe has many ingredients
   Recipe.associate = function(models) {
-    Recipe.hasMany(models.Ingredient, {
-      // through: "recipe_ingredients"
+    Recipe.belongsToMany(models.Ingredient, {
+      through: "recipe_ingredients",
+      as: "groups",
+      foreignKey: "userId"
     });
   };
       
   return Recipe;
 };
+
+
+
+// module.exports = function(sequelize, DataTypes) {
+//   var Recipe = sequelize.define("Recipe", {
+//       name: DataTypes.STRING,
+      
+//   }, {
+//     // disable timestamps
+//     timestamps: false
+//   },{});
+// // recipe has many ingredients
+//   Recipe.associate = function(models) {
+//     Recipe.hasMany(models.Ingredient, {
+//       // through: "recipe_ingredients"
+//     });
+//   };
+      
+//   return Recipe;
+// };
 
 
 
