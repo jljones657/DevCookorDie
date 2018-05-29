@@ -18,6 +18,9 @@ app.use(bodyParser.json());
 //to be able to use page links
 app.use(express.static("public"));
 app.use(express.static("images"));
+forceGet:true;
+
+
 
 app.use(methodOverride("_method"));
 

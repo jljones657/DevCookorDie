@@ -29,7 +29,7 @@ $(document).ready(function() {
             .trim()
         });
 
-        window.location.reload();
+       location.reload();
         }
 
     //function for putting a mother fucking ingredient in the mother fuckin' database
