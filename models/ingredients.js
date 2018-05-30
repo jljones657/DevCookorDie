@@ -12,7 +12,11 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Ingredient.associate = function(models){
-    Ingredient.belongsTo(models.Recipe);
+    Ingredient.belongsToMany(models.Recipe, {
+        through: "recipe_ingredients", 
+        as: "IngredientsInRecipe",
+        foreignKey: "ingredientId"
+    });
   };
 
   return Ingredient;

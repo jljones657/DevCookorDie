@@ -6,8 +6,12 @@ module.exports = function(app) {
 
   //Route for creating Ingredients
   app.post("/recipes", function(req, res) {
-    Recipe.create(req.body).then(function(dbRecipe) {
-      res.redirect("/recipes")
+    Recipe.create({
+      ...req.body, IngredientId: req.params.ingredient_id
+    })
+    .then(function(dbRecipe) {
+    
+
     });
   });
 
@@ -198,7 +202,7 @@ module.exports = function(app) {
 
 app.get("/recipes",function(req, res) {
   Recipe.findAll({
-    include:[Ingredient]
+    include:["IngredientsInRecipe"]
   }).then(function(recipe){
       res.render("index", { recipe:recipe })
   })
