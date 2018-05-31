@@ -32,6 +32,20 @@ $(document).ready(function() {
         $.post("/api/ingredients", ingredientData).then(getIngredients);
     }
 
+    function getIngredient(){
+        let ingredientName = "";
+
+        $.ajax({
+            url: "/recipes/",
+            data: {
+                ingredient: ingredientName
+            },
+            type: "POST"
+        }).then(ingredientWithRecipes => {
+            // ingredientWithRecipes.Recipes
+        })  
+    }
+
     // //Function for showing a list of ingredients
     // function createIngredientsRow(ingredientData) {
     //     var newTr = $("<tr>");

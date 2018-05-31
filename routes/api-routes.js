@@ -54,20 +54,19 @@ module.exports = function(app) {
 
 
   //find all the recipes associated with the entered ingredients
-  // app.get("/recipes", (req, res) => {
-  //   console.log('foo');
-  //   // console.log(req.query);
-  //   db.Ingredient.findOne({
-  //       where: {
-  //           name: req.query.name
-  //       },
-  //       include: [
-  //           { model: db.Recipe },
-  //       ]
-  //   }).then(function(results){
-  //     res.render("index", { info:results });
-  //     console.log(results);
-  //   }).catch( err => res.json(err));
+  app.post("/recipes", (req, res) => {
+    console.log('foo');
+    // console.log(req.query);
+    db.Ingredient.findOne({
+        where: {
+            name: req.body.ingredient
+        },
+        include: [
+            { model: db.Recipe },
+        ]
+    }).then(function(results){
+      res.json(results);
+    }).catch( err => res.json(err));
     
     // .then((ingredient) => {
     //   // logic
