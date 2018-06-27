@@ -13,9 +13,20 @@ module.exports = function(sequelize, DataTypes) {
 
   Ingredient.associate = function(models){
     Ingredient.belongsToMany(models.Recipe, {
-        through: "recipe_ingredients", 
-        as: "IngredientsInRecipe",
-        foreignKey: "ingredientId"
+        through: "recipeingredients", 
+        // as: "RecipeWithIngredients",
+        foreignKey: "ingredient_id",
+        id:{
+          type : sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          validate: {
+            len: {
+                args: 3,
+                msg: "Name must be atleast 3 characters in length"
+            }
+        }
+        }
     });
   };
 

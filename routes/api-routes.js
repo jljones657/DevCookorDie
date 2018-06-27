@@ -4,17 +4,6 @@ var  Recipe = require("../models").Recipe;
 
 module.exports = function(app) {
 
-  //Route for creating Ingredients
-  app.post("/recipes", function(req, res) {
-    Recipe.create({
-      ...req.body, IngredientId: req.params.ingredient_id
-    })
-    .then(function(dbRecipe) {
-    
-
-    });
-  });
-
   //Route for getting Ingredients
   app.get("/api/ingredients", function(req, res) {
     db.Ingredient.findAll({}).then( function (dbRecipe) {
@@ -39,209 +28,82 @@ module.exports = function(app) {
   })
 
 
-  // app.get("/recipes", function(req, res) {
-  //   // Add sequelize code to find all posts, and return them to the user with res.json
-  //   db.Ingredient.findAll({})
-  //   .then(function(dbIngredient){
-  //     res.render("index", { data:dbIngredient })
-  //   })
-  // });
+  
 
-
-
-   //Delete route for deleting ingredients
-  // app.delete("/api/ingredients/:id", function(req, res){
-  //   db.Ingredient.destroy({
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   }).then(function(data) {
-  //     res.json(data);
-  //   });
-  // });
-
-  // app.get("/api/recipes", function(req, res){
-  //   db.Ingredient.findAll({
-  //     include: [{
-  //       model: db.Recipe,
-  //       through: {
-  //         where: { state: Sequelize.col("ingredient.state") }
-  //       }
-  //     }]
-  //   })
-  // });
-
-
-
-    // app.get("/recipes", (req, res) => {
-    // console.log('foo');
-    // // console.log(req.query);
-    // db.Ingredient.findAll({
-    //     name:req.body.name
-    // }).then(function(results){
-    //   res.render("index", { info:results });
-    //   console.log(results);
-    // }).catch( err => res.json(err)); 
-    
-    // .then((ingredient) => {
-      // logic
-    //     const results = {};
-
-    //     const recipes = ingredient.Recipes;
-
-    //     for (var i = 0; i < recipes.length; i++) {
-    //       results[i] = recipes[i].name
-    //     }
-
-    //     res.json({
-    //       recipes: recipes,
-    //       results: results
-    //     });
-    //     console.log(results);
-    //     // res.render("index", {info:results})
-    // }).catch((err) => {
-    //     res.json(err);
-    // });
-
-    
-    // //Code that I want to use with handlebars
-     
-// });
-
-// app.get('/recipes', (req, res) => {  
-//   db.Ingredient.findAll({
-//     include: [
-//       {
-//         model: db.Recipe,
-//       }
-//     ]
-//   }).then(Ingredient => {
-//     // const resObj = Ingredient.map(results => {
-
-//     //   //tidy up the user data
-//     //   return Object.assign(
-//     //     {},
-//     //     {
-//     //       ingredient_id: Ingredient.id,
-//     //       name: Ingredient.name,
-//     //       // ingredient_recipe: Ingredient.Recipe.map(recipe => {
-
-//     //       //   //tidy up the post data
-//     //       //   // return Object.assign(
-//     //       //   //   {},
-//     //       //   //   {
-//     //       //   //     recipe_id: recipe.id,
-//     //       //   //     name: recipe.Ingredient.name,
-//     //       //   //   }
-//     //       //   //   )
-//     //       // })
-//     //     }
-//     //   )
-//     // });
-//     // res.render("index", { info:results });
-//   });
-// });
-
-
-
-  //find all the recipes associated with the entered ingredients
-//   app.get("/recipes", (req, res) => {
-//     console.log('foo');
-//     // console.log(req.query);
-//     db.Ingredient.findAll({
-//         where: {
-//             name: req.body.name
-//         },
-//         include: [
-//             { model: db.Recipe },
-//         ]
-//     }).then(function(results){
-//       res.render("index", { info:results });
-//       console.log(results);
-//     }).catch( err => res.json(err)); 
-    
-//     // .then((ingredient) => {
-//       // logic
-//     //     const results = {};
-
-//     //     const recipes = ingredient.Recipes;
-
-//     //     for (var i = 0; i < recipes.length; i++) {
-//     //       results[i] = recipes[i].name
-//     //     }
-
-//     //     res.json({
-//     //       recipes: recipes,
-//     //       results: results
-//     //     });
-//     //     console.log(results);
-//     //     // res.render("index", {info:results})
-//     // }).catch((err) => {
-//     //     res.json(err);
-//     // });
-
-    
-//     // //Code that I want to use with handlebars
-     
-// });
-
-// app.post("/recipes", function(req, res) {
-//   Recipe.create({
-//     name:"Spaguetti"
-//   }).then(function(dbRecipe) {
-//     dbRecipe.createIngredient({
-//       name: "onion",
-//       type:"vegetable"
-//     }).then(function(){
-//       console.log("it worked")
-//     });
-
-//   });
-// });
-
-
+//This shows all of the ingredients in the page reflecting from the database
 app.get("/recipes",function(req, res) {
   Recipe.findAll({
-    include:["IngredientsInRecipe"]
+    include:[{
+      model: Ingredient,
+      // as: "IngredientsInRecipe",
+      all: true
+        // },{
+        //   model: Recipe,
+        //   as: "RecipeWithIngredients",
+        //   all: true,
+        //   through: {attributes:[]}
+
+        // }
+    }]
   }).then(function(recipe){
       res.render("index", { recipe:recipe })
+      // console.log(recipe);
   })
 })
 
-// app.get("/recipes",function(req, res) {
-//   Ingredient.findAll({
-//     include:[Recipe]
-//   }).then(function(ingredient){
-//       res.render("index", { ingredient:ingredient })
-//   })
-// })
+ //Route for creating Recipes
+ app.post("/recipes", function(req, res) {
+  Recipe.create({
+    ...req.body, IngredientId: req.params.ingredient_id
+  },{
+    include:[{
+      model: Ingredient,
+      all: true
+    }]
+  })
+  .then(function(dbRecipe) {
+        res.redirect("/recipes");
 
 
+  });
+});
 
-// app.post("/recipes", function(req, res){
-//   Recipe.create({name: req.body.name})
-//   .then(function(){
-//     res.redirect("/recipes")
-//   })
-// })
-
+//Route for adding ingredients into the database
 app.post("/recipes/:recipe_id", function(req, res){
   Ingredient.create({
-    ...req.body, RecipeId: req.params.recipe_id })
-    .then(function(){
+    name: req.body.name,
+    type: req.body.type,
+    IngredientId: req.params.ingredient_id,  
+  // },{
+  //   include: [
+  //     {model: Recipe,through: {}}, 
+  //     {model: Recipe, attributes: ["recipeId", "name"]}
+  //            ]
+  // 
+})
+    .then(function(associateRecipes){
+      var type = req.body.type;
+      var name = req.body.name;
+
+      if( name === "tortilla" || name === "rice" || name === "beans" ){
+        
+        associateRecipes.setRecipes([1,4])
+
+      } else if(name === "cheese" || name === "tomatoe" || type === "meat"){
+        associateRecipes.setRecipes([1,3,4])
+      }
+
+
       res.redirect("/recipes")
     })
+
 })
 
+// Ingredient.findById(1).then(ingredients=>{
+//   ingredients.setRecipes([1,3]).then(sc=>{
+//       console.log(sc);
+//   });
+// });
 
 }
   
-  
-
-  
-
-
-
-
-
-//"\n\tRecipe.name: ", req.body.addIngredient I had this on line 11, hopefully removing it makes this 

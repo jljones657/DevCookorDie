@@ -83,13 +83,14 @@
 						</tbody>
 					</table> --}}
 				</div>
+        <div class="column">
         <h1 class="header">Add Recipe</h1>
 
         <form action="/recipes" method="post" class="shop-form column" id="ingredient-form">
           <input type="text" name="name" placeholder="Recipe Name" id="ingredient" name="data[name]">
           <button id="submit">Submit</button>
         </form>
-
+</div>
         <h1 class="shop-header">Awesome Recipes</h1>
 
 <div class="row wrap">
@@ -109,7 +110,7 @@
 					<h4>{{type}}s</h4>
 					<p>{{name}}</p>
 				</div>
-			{{else}}
+			  {{else}}
 				<h4 class="empty">No ingredients have been added.</h4>
 			{{/each}}
 		</div>

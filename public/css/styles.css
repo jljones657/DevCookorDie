@@ -40,8 +40,9 @@ button.edit {
 }
 
 .shop-form {
-	width: 350px;
+	width: 400px;
 	margin-bottom: 25px;
+	border: 2px blue solid;
 }
 
 .shop-header {
