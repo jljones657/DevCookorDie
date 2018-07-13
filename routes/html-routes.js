@@ -4,6 +4,8 @@ var express = require('express');
 // let db = require("../models");
 var path = require("path");
 
+var db = require("../models");
+
 // Routes
 // =============================================================
 module.exports = function(app) {
@@ -16,9 +18,21 @@ module.exports = function(app) {
   });
 
   app.get("/recipes", function(req, res) {
-    res.render('index')
+    let recpies;
+    db.Recipe.findAll({}).then(function(recipes) {
+      console.log('******************************');
+      console.log(recipes);
+      console.log('******************************');
+    }).then(function() {
+      db.Ingredient.findAll({}).then( function (ingredients) {
+        res.render("index", {ingredients: ingredients})
+      }).catch( err => res.json(err))
+    });
   });
 
+
+
+  
 
 };
 

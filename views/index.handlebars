@@ -81,14 +81,16 @@ obj.className ='show';
             <h5 class="card-header">Ingredients</h5>
             <div class="card-body" id="ingredient-form">
               <ul>
-                {{#each data}}
+                {{#each ingredients}}
                   <li>
                     <p>name: {{name}}</p>
                     <a href="/recipes/{{id}}">Ingredient Details</a>
                     <button type="submit" id="delete-ingredient" class="delete-ingredient">Delete</button>
+                    <input type="checkbox" class="ingredient-check" value="{{id}}">
                   </li>
                 {{/each}}
-              </ul>            
+              </ul>         
+              <button class='submit-recipe-button'>Get Ingredients</button>   
             </div>
           </div>
         </div>
@@ -97,8 +99,8 @@ obj.className ='show';
     </div>
     <!-- Page Content -->
     <div class="container1">
-<img id="pizza.jpg" src="/assets/img/pizza.jpg" class="hide"> 
-<img src="/assets/img/Card for Example.png" alt= "eggs" width="500" height="600">
+{{!-- <img id="pizza.jpg" src="/assets/img/pizza.jpg" class="hide"> 
+<img src="/assets/img/Card for Example.png" alt= "eggs" width="500" height="600"> --}}
 <br/> 
 </html> 
     <div class="row">
@@ -107,7 +109,19 @@ obj.className ='show';
             <div class="card-body">
           </div>
         </div>
-    
+
+    <div class="jumbotron recipe">
+        <h1 class="display-4 recipeResults">Recipes</h1>
+          <ul>
+            {{#each recipe}}
+              <li>
+                <p>name: {{name}}</p>
+                <a href="/recipes/{{id}}">Recipe Details</a>
+              </li>
+            {{/each}}
+          </ul>
+          
+    </div>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

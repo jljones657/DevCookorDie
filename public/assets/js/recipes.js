@@ -5,6 +5,42 @@ $(document).ready(function() {
     var newIngredient = $("#ingredient");
     var ingredientList = $(".tbody");
     var ingredientContainer = $(".ingredient-form");
+    var ingredientsArray = [];
+
+    //push ingredient IDs into an ingredients array
+    $('.ingredient-check').on('change', function(e) {
+        var ingredientId = e.target.value;
+        ingredientsArray.push(ingredientId);
+    });
+
+    $(".submit-recipe-button").on("click", function(e){
+        e.preventDefault();
+        
+        $.ajax({
+            url: "/api/recipes/",
+            response: {
+                ingredients: ingredientsArray
+            }
+        }).then(function(response){
+            /* Loop through the recipe data you received back, and insert
+            it into the DOM */
+            var results = response
+            for (var i = 0; i < results.length; i++) {
+                var recipeDiv = $("<div>");
+                recipeDiv.addClass ("recipeResults");
+                var p = $("<p>").text("Rating: " + results[i]);
+                recipeDiv.append(p);
+                $("#recipeResults").prepend(recipeDiv);
+            }
+            console.log(data)
+            // $.get("/api/recipes/", function(data) {
+            //     $.each(data);
+            // });
+               
+        });
+        
+
+    })
 
     //create a new ingredient (I will probably need to get rid of this, and have typehead.js look through available ingredients)
     $(document).on("submit", "#ingredient-form", handleIngredientSubmission);
@@ -12,11 +48,11 @@ $(document).ready(function() {
 
     //Getting a list of Ingredients
     getIngredients();
-
+ 
     //A Function to handle what happens when I want to add an Ingredient to the database
     function handleIngredientSubmission(event) {
         event.preventDefault();
-        //Tell the user fuck off if they don't put anything in the input field
+        //Don't allow the user to put nothing in the input field
         if(!newIngredient.val().trim().trim()) {
             return;
         }
@@ -27,35 +63,35 @@ $(document).ready(function() {
         });
     }
 
-    //function for putting a mother fucking ingredient in the mother fuckin' database
+    //function for putting an ingredient in the database
     function insertIngredient(ingredientData) {
         $.post("/api/ingredients", ingredientData).then(getIngredients);
     }
 
-    function getIngredient(){
-        let ingredientName = "";
+    // function getIngredient(){
+    //     let ingredientName = "";
 
-        $.ajax({
-            url: "/recipes/",
-            data: {
-                ingredient: ingredientName
-            },
-            type: "POST"
-        }).then(ingredientWithRecipes => {
-            // ingredientWithRecipes.Recipes
-        })  
-    }
-
-    // //Function for showing a list of ingredients
-    // function createIngredientsRow(ingredientData) {
-    //     var newTr = $("<tr>");
-    //     newTr.data("ingredient", ingredientData);
-    //     newTr.append("<td>" + ingredientData.name + "</td>");
-    //     newTr.append("<td><a style='cursor:pointer;color:red' class='delete-ingredient'>Delete Author</a></td>");
-    //     return newTr;
+    //     $.ajax({
+    //         url: "/recipes/",
+    //         data: {
+    //             ingredient: ingredientName
+    //         },
+    //         type: "POST"
+    //     }).then(ingredientWithRecipes => {
+    //         // ingredientWithRecipes.Recipes
+    //     })  
     // }
 
-    // // //Getting Ingredients, and rendering them to the Page
+    // //Function for showing a list of ingredients
+    function createIngredientRow(ingredientData) {
+        var newTr = $("<tr>");
+        newTr.data("ingredient", ingredientData);
+        newTr.append("<td>" + ingredientData.name + "</td>");
+        newTr.append("<td><a style='cursor:pointer;color:red' class='delete-ingredient'>Delete Author</a></td>");
+        return newTr;
+    }
+
+    // //Getting Ingredients, and rendering them to the Page
     // function getIngredients() {
     //     $.get("/api/ingredients", function(data) {
     //         var rowsToAdd = [];
@@ -67,7 +103,7 @@ $(document).ready(function() {
     //     });
     // }
     
-    //  // A function for rendering the list of authors to the page
+     // A function for rendering the list of authors to the page
     // function renderIngredientList(rows) {
     //     ingredientList.children().not(":last").remove();
     //     ingredientContainer.children(".alert").remove();
@@ -100,5 +136,4 @@ $(document).ready(function() {
 
 
 
-
-});
+})

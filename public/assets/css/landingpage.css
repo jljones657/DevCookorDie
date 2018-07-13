@@ -44,3 +44,8 @@ body {
 .active {
     background-color: #4CAF50 !important;
 }
+
+.recipe {
+    height: 30%;
+    width: 30%;
+}
