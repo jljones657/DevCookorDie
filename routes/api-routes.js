@@ -106,9 +106,9 @@ module.exports = function(app) {
        }
      }
    }).then(function(recipe) {
-    res.render("index", { recipe:recipe })
+    // res.render("index", { recipe:recipe })
      console.log(recipe);
-    //  res.json(recipe);
+     res.json(recipe);
    }).catch(function(err) {
      console.error(err);
    });

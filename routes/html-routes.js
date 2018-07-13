@@ -18,7 +18,7 @@ module.exports = function(app) {
   });
 
   app.get("/recipes", function(req, res) {
-    let recpies;
+    let recipes;
     db.Recipe.findAll({}).then(function(recipes) {
       console.log('******************************');
       console.log(recipes);
@@ -29,6 +29,8 @@ module.exports = function(app) {
       }).catch( err => res.json(err))
     });
   });
+
+
 
 
 

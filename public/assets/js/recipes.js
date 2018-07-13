@@ -18,20 +18,12 @@ $(document).ready(function() {
         
         $.ajax({
             url: "/api/recipes/",
-            response: {
+            data: {
                 ingredients: ingredientsArray
             }
-        }).then(function(response){
+        }).then(function(data){
             /* Loop through the recipe data you received back, and insert
             it into the DOM */
-            var results = response
-            for (var i = 0; i < results.length; i++) {
-                var recipeDiv = $("<div>");
-                recipeDiv.addClass ("recipeResults");
-                var p = $("<p>").text("Rating: " + results[i]);
-                recipeDiv.append(p);
-                $("#recipeResults").prepend(recipeDiv);
-            }
             console.log(data)
             // $.get("/api/recipes/", function(data) {
             //     $.each(data);
